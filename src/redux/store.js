@@ -1,9 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { counterSlice } from './features/counter/counterSlice'
-import { activeLinkSlice } from './features/link-active/link-active'
+import counterReducer from './features/counter/counterSlice'
 export const store = configureStore({
-  reducer: {
-    counter:counterSlice,
-    activeLink:activeLinkSlice
-  },
+  reducer: counterReducer,
 })

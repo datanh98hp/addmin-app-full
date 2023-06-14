@@ -8,13 +8,17 @@ import { store } from "./redux/store";
 import { Provider } from "react-redux";
 /* The following line can be included in your src/index.js or App.js file */
 // import 'App.scss';
+import { RouterProvider } from 'react-router-dom'
+import router from "./routes";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <RouterProvider router={router}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </RouterProvider>
   </Provider>
 );
 

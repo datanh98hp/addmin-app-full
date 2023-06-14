@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,7 +13,24 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Header from "../Components/Header";
 import Card from 'react-bootstrap/Card';
-export default function Layout() {
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { active } from "../redux/features/link-active/link-active";
+
+export default function Layout({children,title}) {
+  const path = useLocation();
+ 
+
+  // const activeLink = useSelector((state)=>state.activeLink.path);
+  // const dispath    = useDispatch();
+  // useEffect(()=>{
+  //   activeLinkHandle();
+  // },[]);
+
+  // const activeLinkHandle = ()=>{
+  //   dispath(active('wallpapers'))
+  // }
+
   return (
     <Container fluid>
       <Row>
@@ -22,55 +39,24 @@ export default function Layout() {
       <Row>
         <Col md={3} className="d-none d-md-grid">
           <ListGroup variant="flush">
-            <ListGroup.Item disabled>Cras justo odio</ListGroup.Item>
-            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-            <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+            {/* <Link to={`/wallpapers`} className={`list-group-item ${(activeLink==='wallpapers') ? 'text-emphasis-secondary': ''}`}>Wallpapers</Link> */}
+            <Link to={`/categories`} className="list-group-item">Categories</Link>
+            <Link to={`/user-access`} className="list-group-item">User</Link>
+            <Link to={`/session-anonynmous`} className="list-group-item">Anonymous account</Link>
+            <Link to={`/contact-manage`} className="list-group-item">Contact manage</Link>
+            <Link to={`/policies-manage`} className="list-group-item">Policies manage</Link>
           </ListGroup>
         </Col>
         <Col md={9}>
-          <Container className="">
-            {/* <Table responsive="md">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  {Array.from({ length: 12 }).map((_, index) => (
-                    <th key={index}>Table heading</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  {Array.from({ length: 12 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>2</td>
-                  {Array.from({ length: 12 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>3</td>
-                  {Array.from({ length: 12 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                  ))}
-                </tr>
-              </tbody>
-            </Table> */}
             <Card border="light">
-              <Card.Header>Header</Card.Header>
+              <Card.Header>{path.pathname} </Card.Header>
               <Card.Body>
-                <Card.Title>Light Card Title</Card.Title>
+                <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                    {children}
                 </Card.Text>
               </Card.Body>
             </Card>
-          </Container>
         </Col>
       </Row>
     </Container>

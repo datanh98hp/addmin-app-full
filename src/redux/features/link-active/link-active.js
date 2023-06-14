@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  isActive: null,
+  path: '',
 }
 
 export const activeLinkSlice = createSlice({
   name: 'linkActive',
   initialState,
-  reducers: {
+  reducer: {
     active: (state,action) => {
       state.value = action.payload
     },

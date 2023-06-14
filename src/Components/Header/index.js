@@ -9,6 +9,9 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import ListGroup from "react-bootstrap/ListGroup";
+import { useDispatch, useSelector } from "react-redux";
+import { increment } from "../../redux/features/counter/counterSlice";
+
 
 
 export default function Header() {
@@ -16,14 +19,13 @@ export default function Header() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   // 
-
-
-
-
+  const count = useSelector((state) => state.value)
+  const dispatch = useDispatch()
+  console.log(count)
   return (
     <>
-      <Container className="my-3">
-        <div className="d-flex justify-content-between">
+      <Container className="mb-2 bg-primary-subtle">
+        <div className="d-flex justify-content-between align-items-center">
           <div className="d-md-none">
             <Button variant="" onClick={handleShow}>
               <svg
@@ -39,21 +41,19 @@ export default function Header() {
               </svg>
             </Button>
           </div>
-          <div className="d-none d-md-flex">lg</div>
+          <div className="d-none d-md-flex">
+            <h3>LOGO</h3>
+            <button onClick={()=>dispatch(increment())}>{count}</button>
+          </div>
           <div className="">
             <Nav className="me-auto">
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+            
+              <NavDropdown title="Account" id="basic-nav-dropdown" className="text-white">
+                <NavDropdown.Item href="/" className="">
+                  Profile
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
+                <NavDropdown.Item href="/">
+                  Logout
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
